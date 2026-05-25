@@ -280,6 +280,16 @@
   }
 
   .check-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .avail-group-label {
+    width: 100%;
+    font-size: 10px; font-weight: 600;
+    color: var(--gray-400); text-transform: uppercase;
+    letter-spacing: 0.09em;
+    margin-top: 10px; margin-bottom: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .avail-group-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+  .avail-group-label:first-child { margin-top: 0; }
   .time-hint { color: var(--gray-400); font-size: 11px; margin-left: 3px; }
   .field-hint { display: block; font-size: 12px; color: var(--gray-500); margin-bottom: 6px; font-style: italic; }
 
@@ -419,6 +429,18 @@
           <input type="email" id="email" placeholder="seu@email.com">
           <div class="error-msg" id="err-email">Informe um e-mail válido.</div>
         </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Estado civil <span class="req">*</span></span>
+        <select id="estadoCivil" onchange="updateProgress()">
+          <option value="">Selecione...</option>
+          <option value="solteiro">Solteiro(a)</option>
+          <option value="casado">Casado(a)</option>
+          <option value="divorciado">Divorciado(a)</option>
+          <option value="viuvo">Viúvo(a)</option>
+        </select>
+        <div class="error-msg" id="err-estadoCivil">Selecione seu estado civil.</div>
       </div>
     </div>
 
@@ -576,8 +598,10 @@
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
           <span class="field-hint">Você pode marcar mais de uma opção.</span>
           <div class="check-grid">
+            <span class="avail-group-label">Cultos regulares</span>
             <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="midia" data-avail-val="domingo"><input type="checkbox" name="midia-avail" value="domingo"><div class="check-box"></div>Cultos de Domingo</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
+            <span class="avail-group-label">Ministérios</span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
@@ -587,7 +611,7 @@
           </div>
           <div class="error-msg" id="err-midia-avail">Selecione ao menos uma disponibilidade.</div>
           <div class="domingo-horarios" id="midia-domingo-horarios">
-            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de Domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="9h"><div class="check-box"></div>9h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="11h"><div class="check-box"></div>11h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="17h"><div class="check-box"></div>17h</label>
@@ -618,8 +642,10 @@
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
           <span class="field-hint">Você pode marcar mais de uma opção.</span>
           <div class="check-grid">
+            <span class="avail-group-label">Cultos regulares</span>
             <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="som" data-avail-val="domingo"><input type="checkbox" name="som-avail" value="domingo"><div class="check-box"></div>Cultos de Domingo</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
+            <span class="avail-group-label">Ministérios</span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
@@ -629,7 +655,7 @@
           </div>
           <div class="error-msg" id="err-som-avail">Selecione ao menos uma disponibilidade.</div>
           <div class="domingo-horarios" id="som-domingo-horarios">
-            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de Domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="9h"><div class="check-box"></div>9h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="11h"><div class="check-box"></div>11h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="17h"><div class="check-box"></div>17h</label>
@@ -660,8 +686,10 @@
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
           <span class="field-hint">Você pode marcar mais de uma opção.</span>
           <div class="check-grid">
+            <span class="avail-group-label">Cultos regulares</span>
             <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="iluminacao" data-avail-val="domingo"><input type="checkbox" name="iluminacao-avail" value="domingo"><div class="check-box"></div>Cultos de Domingo</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
+            <span class="avail-group-label">Ministérios</span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
@@ -671,7 +699,7 @@
           </div>
           <div class="error-msg" id="err-iluminacao-avail">Selecione ao menos uma disponibilidade.</div>
           <div class="domingo-horarios" id="iluminacao-domingo-horarios">
-            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de Domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="9h"><div class="check-box"></div>9h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="11h"><div class="check-box"></div>11h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="17h"><div class="check-box"></div>17h</label>
@@ -954,7 +982,7 @@ function showErr(id, show, msg) {
 
 // ── Progresso ────────────────────────────────────────────────────
 function updateProgress() {
-  var s1 = !!(val('nomeCompleto') && val('dataNasc') && val('email'));
+  var s1 = !!(val('nomeCompleto') && val('dataNasc') && val('email') && val('estadoCivil'));
   var s2 = selectedDepts.length > 0;
   var s3 = s2 && deptFieldsOk(false);
   var s4 = consentAllChecked();
@@ -1033,6 +1061,7 @@ function consentAllChecked() {
 function validate() {
   var ok = true;
   if (!val('nomeCompleto')) { showErr('err-nomeCompleto',true); ok=false; } else showErr('err-nomeCompleto',false);
+  if (!val('estadoCivil'))  { showErr('err-estadoCivil',true);  ok=false; } else showErr('err-estadoCivil',false);
   if (!val('dataNasc'))     { showErr('err-dataNasc',true);     ok=false; } else showErr('err-dataNasc',false);
   var em = val('email');
   if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { showErr('err-email',true,'Informe um e-mail válido.'); ok=false; } else showErr('err-email',false);
@@ -1057,6 +1086,7 @@ function buildPayload() {
     data_nascimento: val('dataNasc'),
     departamento: 'Produção',
     areas: selectedDepts,
+    estado_civil: val('estadoCivil'),
     sugestoes: val('sugestoes')
   };
   if (selectedDepts.indexOf('palco') >= 0) d.palco = {
