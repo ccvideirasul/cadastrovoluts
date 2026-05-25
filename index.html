@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro de Voluntários da Produção — CCVideira Sul</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0d0d0d;
+    --gray-900: #1a1a1a;
+    --gray-800: #2c2c2c;
+    --gray-700: #444444;
+    --gray-600: #5f5f5f;
+    --gray-500: #7a7a7a;
+    --gray-400: #9e9e9e;
+    --gray-300: #c4c4c4;
+    --gray-200: #e2e2e2;
+    --gray-100: #f2f2f2;
+    --gray-50: #f8f8f8;
+    --white: #ffffff;
+    --danger: #c0392b;
+    --danger-light: #fdf0ee;
+    --border: #d4d4d4;
+    --radius: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.09);
+  }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: #ebebeb;
+    color: var(--gray-900);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  header {
+    background: var(--black);
+    padding: 28px 0 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 20px;
+    background: #ebebeb;
+    clip-path: ellipse(52% 100% at 50% 100%);
+  }
+  .header-inner { max-width: 660px; margin: 0 auto; padding: 0 24px; position: relative; }
+  .logo-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 100px;
+    padding: 5px 16px;
+    margin-bottom: 14px;
+  }
+  .logo-badge span { color: rgba(255,255,255,0.75); font-size: 11px; letter-spacing: 0.10em; font-weight: 500; text-transform: uppercase; }
+  header h1 { color: #fff; font-size: 24px; font-weight: 600; letter-spacing: -0.4px; line-height: 1.2; }
+  header p { color: rgba(255,255,255,0.55); font-size: 13px; margin-top: 7px; font-weight: 300; }
+
+  .container { max-width: 660px; margin: 0 auto; padding: 28px 16px 0; }
+
+  .progress-bar { background: #d8d8d8; border-radius: 100px; height: 4px; margin-bottom: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--black); border-radius: 100px; transition: width 0.4s ease; width: 0%; }
+  .progress-label { font-size: 11px; color: var(--gray-500); text-align: right; margin-bottom: 22px; font-family: 'DM Mono', monospace; }
+
+  .card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 26px 26px 22px;
+    margin-bottom: 14px;
+    border: 1px solid var(--gray-200);
+  }
+  .card-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 600; color: var(--black);
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--gray-200);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .card-title .icon {
+    width: 28px; height: 28px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+
+  .field-label {
+    display: block;
+    font-size: 12px; font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .field-label .req { color: var(--danger); margin-left: 2px; }
+  .field-label .hint { color: var(--gray-400); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 12px; margin-left: 4px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 13px;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    color: var(--gray-900);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--black);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.07);
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7a7a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 13px center; padding-right: 36px;
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .error-msg {
+    display: none; color: var(--danger);
+    font-size: 11px; margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .info-box {
+    background: var(--gray-50);
+    border-left: 3px solid var(--gray-800);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 11px 14px;
+    font-size: 12.5px;
+    color: var(--gray-600);
+    margin-bottom: 18px;
+    line-height: 1.55;
+  }
+
+  /* Departamento cards */
+  .dept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .dept-card {
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 14px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    display: flex; align-items: flex-start; gap: 10px;
+    user-select: none;
+  }
+  .dept-card:hover { border-color: var(--gray-400); background: var(--gray-50); }
+  .dept-card.selected {
+    border-color: var(--black);
+    background: #f5f5f5;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.07);
+  }
+  .dept-card .dept-checkbox {
+    width: 16px; height: 16px; flex-shrink: 0;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 4px;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s, background 0.15s;
+    margin-top: 1px;
+  }
+  .dept-card.selected .dept-checkbox {
+    background: var(--black); border-color: var(--black);
+  }
+  .dept-card.selected .dept-checkbox::after {
+    content: '';
+    width: 8px; height: 5px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg) translateY(-1px);
+    display: block;
+  }
+  .dept-card .dept-info { flex: 1; }
+  .dept-card .dept-name { font-size: 13px; font-weight: 600; color: var(--gray-900); line-height: 1.3; }
+  .dept-card .dept-roles { font-size: 11px; color: var(--gray-500); margin-top: 3px; line-height: 1.4; }
+
+  /* Seção de perguntas por área */
+  .dept-section {
+    display: none;
+    border-top: 1.5px solid var(--gray-100);
+    padding-top: 20px;
+    margin-top: 20px;
+    animation: fadeIn 0.25s ease;
+  }
+  .dept-section.visible { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .dept-section-title {
+    font-size: 12px; font-weight: 600;
+    color: var(--gray-500); text-transform: uppercase;
+    letter-spacing: 0.07em; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dept-section-title::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+  /* Sub-seções condicionais */
+  .sub-section {
+    display: none;
+    margin-top: 14px;
+    animation: fadeIn 0.2s ease;
+  }
+  .sub-section.visible { display: block; }
+
+  /* Checkboxes de horário de domingo */
+  .domingo-horarios {
+    display: none;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-200);
+    animation: fadeIn 0.2s ease;
+  }
+  .domingo-horarios.visible { display: flex; }
+
+  .check-item {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-size: 13px; color: var(--gray-700);
+    transition: border-color 0.12s, background 0.12s;
+    user-select: none;
+  }
+  .check-item:hover { border-color: var(--gray-400); background: var(--gray-100); }
+  .check-item.checked {
+    border-color: var(--black);
+    background: #f0f0f0;
+    color: var(--black);
+    font-weight: 500;
+  }
+  .check-item input[type="checkbox"] { display: none; }
+  .check-box {
+    width: 14px; height: 14px; flex-shrink: 0;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 3px;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.12s, background 0.12s;
+    pointer-events: none;
+  }
+  .check-item.checked .check-box {
+    background: var(--black); border-color: var(--black);
+  }
+  .check-item.checked .check-box::after {
+    content: '';
+    width: 7px; height: 4px;
+    border-left: 1.5px solid white;
+    border-bottom: 1.5px solid white;
+    transform: rotate(-45deg) translateY(-1px);
+    display: block;
+  }
+
+  /* Submit */
+  .btn-submit {
+    width: 100%; padding: 14px 24px;
+    background: var(--black); color: white;
+    border: none; border-radius: var(--radius);
+    font-family: 'Sora', sans-serif;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: -0.2px;
+    margin-top: 10px;
+  }
+  .btn-submit:hover { opacity: 0.85; }
+  .btn-submit:active { transform: scale(0.99); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-clear {
+    display: block; width: 100%;
+    margin-top: 10px; padding: 10px;
+    background: none; border: none;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px; color: var(--gray-400);
+    cursor: pointer; text-align: center;
+    transition: color 0.15s;
+  }
+  .btn-clear:hover { color: var(--danger); }
+
+  /* Sucesso */
+  #successScreen {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  .success-icon {
+    width: 64px; height: 64px;
+    background: var(--black); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 28px; color: white;
+  }
+  #successScreen h2 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  #successScreen p { color: var(--gray-500); font-size: 14px; margin-bottom: 28px; }
+  .btn-novo {
+    background: none;
+    border: 1.5px solid var(--gray-300);
+    border-radius: var(--radius);
+    padding: 10px 22px;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    color: var(--gray-700);
+    transition: border-color 0.15s;
+  }
+  .btn-novo:hover { border-color: var(--black); color: var(--black); }
+
+  .check-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .time-hint { color: var(--gray-400); font-size: 11px; margin-left: 3px; }
+  .field-hint { display: block; font-size: 12px; color: var(--gray-500); margin-bottom: 2px; font-style: italic; }
+
+  /* Card de ciências/consentimento */
+  .consent-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+  .consent-item:last-of-type { margin-bottom: 0; }
+  .consent-item:hover { border-color: var(--gray-400); }
+  .consent-item.checked {
+    border-color: var(--black);
+    background: #f5f5f5;
+  }
+  .consent-item .consent-check {
+    width: 18px; height: 18px; flex-shrink: 0;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 4px;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s, background 0.15s;
+    margin-top: 1px;
+  }
+  .consent-item.checked .consent-check {
+    background: var(--black); border-color: var(--black);
+  }
+  .consent-item.checked .consent-check::after {
+    content: '';
+    width: 9px; height: 5px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg) translateY(-1px);
+    display: block;
+  }
+  .consent-item input[type="checkbox"] { display: none; }
+  .consent-text { font-size: 13px; color: var(--gray-700); line-height: 1.55; flex: 1; }
+  .consent-text strong { color: var(--gray-900); }
+
+  @media (max-width: 480px) {
+    .row-2 { grid-template-columns: 1fr; }
+    .dept-grid { grid-template-columns: 1fr 1fr; }
+    header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-badge"><span>CCVideira Sul</span></div>
+    <h1>Cadastro de Voluntários da Produção</h1>
+    <p>Preencha seus dados para integrar o departamento de Produção</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <p class="progress-label" id="progressLabel">0 de 3 seções preenchidas</p>
+
+  <div id="mainForm">
+
+    <!-- ── DADOS PESSOAIS ── -->
+    <div class="card">
+      <div class="card-title"><div class="icon">👤</div> Dados pessoais</div>
+
+      <div class="field">
+        <span class="field-label">Nome completo <span class="req">*</span></span>
+        <input type="text" id="nomeCompleto" placeholder="Seu nome completo">
+        <div class="error-msg" id="err-nomeCompleto">Informe seu nome completo.</div>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <span class="field-label">Data de nascimento <span class="req">*</span></span>
+          <input type="date" id="dataNasc">
+          <div class="error-msg" id="err-dataNasc">Informe sua data de nascimento.</div>
+        </div>
+        <div class="field">
+          <span class="field-label">E-mail <span class="req">*</span></span>
+          <input type="email" id="email" placeholder="seu@email.com">
+          <div class="error-msg" id="err-email">Informe um e-mail válido.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ÁREA · DISPONIBILIDADE · PERIODICIDADE ── -->
+    <div class="card">
+      <div class="card-title"><div class="icon">🎯</div> Área, disponibilidade e periodicidade</div>
+
+      <div class="info-box">
+        Selecione <strong>uma ou mais áreas</strong> das quais você faz parte. Perguntas específicas de cada área aparecerão logo abaixo.
+      </div>
+
+      <div class="field">
+        <span class="field-label">Área(s) <span class="req">*</span></span>
+        <div class="dept-grid" id="deptGrid">
+
+          <div class="dept-card" data-dept="palco" onclick="toggleDept(this)">
+            <div class="dept-checkbox"></div>
+            <div class="dept-info">
+              <div class="dept-name">Produção de Palco</div>
+              <div class="dept-roles">P1 · P3 · Stage · Stagehand · Safepass</div>
+            </div>
+          </div>
+
+          <div class="dept-card" data-dept="midia" onclick="toggleDept(this)">
+            <div class="dept-checkbox"></div>
+            <div class="dept-info">
+              <div class="dept-name">Mídia</div>
+              <div class="dept-roles">MadMapper · ProPresenter</div>
+            </div>
+          </div>
+
+          <div class="dept-card" data-dept="som" onclick="toggleDept(this)">
+            <div class="dept-checkbox"></div>
+            <div class="dept-info">
+              <div class="dept-name">Som</div>
+              <div class="dept-roles">Monitor · PA</div>
+            </div>
+          </div>
+
+          <div class="dept-card" data-dept="iluminacao" onclick="toggleDept(this)">
+            <div class="dept-checkbox"></div>
+            <div class="dept-info">
+              <div class="dept-name">Iluminação</div>
+              <div class="dept-roles">Operador de iluminação</div>
+            </div>
+          </div>
+
+          <div class="dept-card" data-dept="broadcast" onclick="toggleDept(this)">
+            <div class="dept-checkbox"></div>
+            <div class="dept-info">
+              <div class="dept-name">Broadcast</div>
+              <div class="dept-roles">Diretor · Operador de câmera</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="error-msg" id="err-dept" style="margin-top:8px">Selecione pelo menos uma área.</div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           PRODUÇÃO DE PALCO
+      ════════════════════════════════════════ -->
+      <div class="dept-section" id="sec-palco">
+        <div class="dept-section-title">Produção de palco</div>
+
+        <div class="field">
+          <span class="field-label">Função principal <span class="req">*</span></span>
+          <select id="palco-funcao" onchange="updateProgress()">
+            <option value="">Selecione...</option>
+            <option>P1</option>
+            <option>P3</option>
+            <option>Stage</option>
+            <option>Stagehand</option>
+            <option>Safepass</option>
+          </select>
+          <div class="error-msg" id="err-palco-funcao">Selecione sua função.</div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Onde você serve? <span class="req">*</span></span>
+          <select id="palco-onde" onchange="onPalcoOndeChange()">
+            <option value="">Selecione...</option>
+            <option value="domingo-quarta">Cultos de Domingo/Quarta do Encontro</option>
+            <option value="ministerios">Cultos dos Ministérios</option>
+          </select>
+          <div class="error-msg" id="err-palco-onde">Selecione onde você serve.</div>
+        </div>
+
+        <!-- Se domingo/quarta: equipe -->
+        <div class="sub-section" id="palco-sub-equipe">
+          <div class="field">
+            <span class="field-label">Equipe em que serve <span class="req">*</span></span>
+            <select id="palco-equipe" onchange="updateProgress()">
+              <option value="">Selecione...</option>
+              <option>Equipe 1 — P1: Jorge</option>
+              <option>Equipe 2 — P1: Lucas Rafael</option>
+              <option>Equipe 3 — P1: Ivo</option>
+              <option>Equipe 4 — P1: Lucas</option>
+              <option>Equipe 5 — P1: Thalys</option>
+              <option>Equipe 6 — P1: Caio</option>
+              <option>Equipe 7 — P1: Pedro Igor</option>
+              <option>Equipe 8 — P1: Jardel</option>
+            </select>
+            <div class="error-msg" id="err-palco-equipe">Selecione sua equipe.</div>
+          </div>
+        </div>
+
+        <!-- Se ministérios: qual ministério -->
+        <div class="sub-section" id="palco-sub-ministerio">
+          <div class="field">
+            <span class="field-label">Ministério em que serve <span class="req">*</span></span>
+            <select id="palco-ministerio" onchange="updateProgress()">
+              <option value="">Selecione...</option>
+              <option>A13</option>
+              <option>Vert</option>
+              <option>Inspire</option>
+              <option>Somos Um</option>
+            </select>
+            <div class="error-msg" id="err-palco-ministerio">Selecione o ministério.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           MÍDIA
+      ════════════════════════════════════════ -->
+      <div class="dept-section" id="sec-midia">
+        <div class="dept-section-title">Mídia</div>
+
+        <div class="field">
+          <span class="field-label">Função principal <span class="req">*</span></span>
+          <select id="midia-funcao" onchange="onMidiaFuncaoChange()">
+            <option value="">Selecione...</option>
+            <option value="ProPresenter">ProPresenter</option>
+            <option value="MadMapper">MadMapper</option>
+          </select>
+          <div class="error-msg" id="err-midia-funcao">Selecione sua função.</div>
+        </div>
+
+        <!-- Só aparece se ProPresenter -->
+        <div class="sub-section" id="midia-sub-treinamento">
+          <div class="field">
+            <span class="field-label">Você tem interesse em receber treinamento para MadMapper? <span class="req">*</span></span>
+            <select id="midia-treinamento" onchange="updateProgress()">
+              <option value="">Selecione...</option>
+              <option value="sim">Sim, tenho interesse</option>
+              <option value="nao">Não, por enquanto não</option>
+            </select>
+            <div class="error-msg" id="err-midia-treinamento">Selecione uma opção.</div>
+          </div>
+        </div>
+
+        <!-- Disponibilidade Mídia -->
+        <div class="field" style="margin-top:14px">
+          <span class="field-label">Disponibilidade <span class="req">*</span></span>
+          <select id="midia-avail" onchange="onAvailChange('midia')">
+            <option value="">Selecione...</option>
+            <option value="domingo">Cultos de Domingo</option>
+            <option value="quarta">Quarta do Encontro</option>
+            <option value="a13jr">A13 Jr (sábado às 16h)</option>
+            <option value="a13school">A13 School (sábado às 18h)</option>
+            <option value="a13uni">A13 Uni (sábado às 20h)</option>
+            <option value="vert">Vert (sextas ou sábados às 20h)</option>
+            <option value="inspire">Inspire (sextas ou sábados às 20h)</option>
+            <option value="somosum">Somos Um (sábados às 18h)</option>
+          </select>
+          <div class="error-msg" id="err-midia-avail">Selecione sua disponibilidade.</div>
+          <!-- Horários de domingo -->
+          <div class="domingo-horarios" id="midia-domingo-horarios">
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários? <span class="req">*</span></span>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="9h"><div class="check-box"></div>9h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="11h"><div class="check-box"></div>11h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="17h"><div class="check-box"></div>17h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="19h"><div class="check-box"></div>19h</label>
+            <div class="error-msg" id="err-midia-domingo" style="width:100%">Selecione ao menos um horário.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Periodicidade <span class="req">*</span></span>
+          <select id="midia-period" onchange="updateProgress()">
+            <option value="">Selecione...</option>
+            <option value="semanal">Semanal</option>
+            <option value="quinzenal">Quinzenal</option>
+            <option value="mensal">Mensal</option>
+          </select>
+          <div class="error-msg" id="err-midia-period">Selecione a periodicidade.</div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           SOM
+      ════════════════════════════════════════ -->
+      <div class="dept-section" id="sec-som">
+        <div class="dept-section-title">Som</div>
+
+        <div class="field">
+          <span class="field-label">Disponibilidade <span class="req">*</span></span>
+          <select id="som-avail" onchange="onAvailChange('som')">
+            <option value="">Selecione...</option>
+            <option value="domingo">Cultos de Domingo</option>
+            <option value="quarta">Quarta do Encontro</option>
+            <option value="a13jr">A13 Jr (sábado às 16h)</option>
+            <option value="a13school">A13 School (sábado às 18h)</option>
+            <option value="a13uni">A13 Uni (sábado às 20h)</option>
+            <option value="vert">Vert (sextas ou sábados às 20h)</option>
+            <option value="inspire">Inspire (sextas ou sábados às 20h)</option>
+            <option value="somosum">Somos Um (sábados às 18h)</option>
+          </select>
+          <div class="error-msg" id="err-som-avail">Selecione sua disponibilidade.</div>
+          <div class="domingo-horarios" id="som-domingo-horarios">
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários? <span class="req">*</span></span>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="9h"><div class="check-box"></div>9h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="11h"><div class="check-box"></div>11h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="17h"><div class="check-box"></div>17h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="19h"><div class="check-box"></div>19h</label>
+            <div class="error-msg" id="err-som-domingo" style="width:100%">Selecione ao menos um horário.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Periodicidade <span class="req">*</span></span>
+          <select id="som-period" onchange="updateProgress()">
+            <option value="">Selecione...</option>
+            <option value="semanal">Semanal</option>
+            <option value="quinzenal">Quinzenal</option>
+            <option value="mensal">Mensal</option>
+          </select>
+          <div class="error-msg" id="err-som-period">Selecione a periodicidade.</div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           ILUMINAÇÃO
+      ════════════════════════════════════════ -->
+      <div class="dept-section" id="sec-iluminacao">
+        <div class="dept-section-title">Iluminação</div>
+
+        <div class="field">
+          <span class="field-label">Disponibilidade <span class="req">*</span></span>
+          <select id="iluminacao-avail" onchange="onAvailChange('iluminacao')">
+            <option value="">Selecione...</option>
+            <option value="domingo">Cultos de Domingo</option>
+            <option value="quarta">Quarta do Encontro</option>
+            <option value="a13jr">A13 Jr (sábado às 16h)</option>
+            <option value="a13school">A13 School (sábado às 18h)</option>
+            <option value="a13uni">A13 Uni (sábado às 20h)</option>
+            <option value="vert">Vert (sextas ou sábados às 20h)</option>
+            <option value="inspire">Inspire (sextas ou sábados às 20h)</option>
+            <option value="somosum">Somos Um (sábados às 18h)</option>
+          </select>
+          <div class="error-msg" id="err-iluminacao-avail">Selecione sua disponibilidade.</div>
+          <div class="domingo-horarios" id="iluminacao-domingo-horarios">
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários? <span class="req">*</span></span>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="9h"><div class="check-box"></div>9h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="11h"><div class="check-box"></div>11h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="17h"><div class="check-box"></div>17h</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="19h"><div class="check-box"></div>19h</label>
+            <div class="error-msg" id="err-iluminacao-domingo" style="width:100%">Selecione ao menos um horário.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Periodicidade <span class="req">*</span></span>
+          <select id="iluminacao-period" onchange="updateProgress()">
+            <option value="">Selecione...</option>
+            <option value="semanal">Semanal</option>
+            <option value="quinzenal">Quinzenal</option>
+            <option value="mensal">Mensal</option>
+          </select>
+          <div class="error-msg" id="err-iluminacao-period">Selecione a periodicidade.</div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           BROADCAST
+      ════════════════════════════════════════ -->
+      <div class="dept-section" id="sec-broadcast">
+        <div class="dept-section-title">Broadcast</div>
+
+        <div class="field">
+          <span class="field-label">Equipe em que serve <span class="req">*</span></span>
+          <select id="broadcast-equipe" onchange="onBroadcastEquipeChange()">
+            <option value="">Selecione...</option>
+            <option>Equipe 1 — Líder: Lucas</option>
+            <option>Equipe 2 — Líder: Vitória</option>
+            <option>Equipe 3 — Líder: Makson</option>
+            <option>Equipe 4 — Líder: Otávio</option>
+            <option value="trainee">Ainda estou em treinamento</option>
+          </select>
+          <div class="error-msg" id="err-broadcast-equipe">Selecione sua equipe.</div>
+        </div>
+
+        <div class="sub-section" id="broadcast-sub-direcao">
+          <div class="field">
+            <span class="field-label">Você já serviu na direção? <span class="req">*</span></span>
+            <select id="broadcast-direcao" onchange="updateProgress()">
+              <option value="">Selecione...</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+            <div class="error-msg" id="err-broadcast-direcao">Selecione uma opção.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Tem disponibilidade para os cultos dos ministérios? <span class="req">*</span></span>
+          <select id="broadcast-min-avail" onchange="onBroadcastMinAvailChange()">
+            <option value="">Selecione...</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+          </select>
+          <div class="error-msg" id="err-broadcast-min-avail">Selecione uma opção.</div>
+        </div>
+
+        <div class="sub-section" id="broadcast-sub-ministerio">
+          <div class="field">
+            <span class="field-label">Qual(is) ministério(s)? <span class="req">*</span></span>
+            <span class="field-hint">Você pode marcar mais de uma opção.</span>
+            <div class="check-grid" style="margin-top:8px">
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="vert"><div class="check-box"></div>Vert <span class="time-hint">sex/sáb 20h</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="inspire"><div class="check-box"></div>Inspire <span class="time-hint">sex/sáb 20h</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="somosum"><div class="check-box"></div>Somos Um <span class="time-hint">sáb 18h</span></label>
+            </div>
+            <div class="error-msg" id="err-broadcast-ministerio">Selecione ao menos um ministério.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /card área+disponibilidade -->
+
+    <!-- ── ORIENTAÇÕES DA PRODUÇÃO ── -->
+    <div class="card">
+      <div class="card-title"><div class="icon">📋</div> Orientações da produção</div>
+
+      <div class="info-box">
+        Leia com atenção e marque cada item para confirmar que você está ciente. <strong>Todas as marcações são obrigatórias</strong> para concluir o cadastro.
+      </div>
+
+      <div class="consent-item" onclick="toggleConsent(this,'consent-vestimenta')">
+        <div class="consent-check"></div>
+        <input type="checkbox" id="consent-vestimenta">
+        <span class="consent-text">Estou ciente de que, <strong>a partir de julho de 2026</strong>, será obrigatório o uso de <strong>vestimenta completamente preta e calçado fechado e preto</strong> durante o serviço.</span>
+      </div>
+
+      <div class="consent-item" onclick="toggleConsent(this,'consent-horario')">
+        <div class="consent-check"></div>
+        <input type="checkbox" id="consent-horario">
+        <span class="consent-text">Estou ciente de que o horário de chegada é <strong>1 hora antes do início do culto</strong> para as áreas de Produção de Palco, Mídia e Broadcast, e <strong>1h30 antes do início</strong> para Iluminação e Som — e que a recorrência de atrasos resultará em retirada dos grupos de serviço.</span>
+      </div>
+
+      <div class="consent-item" onclick="toggleConsent(this,'consent-ausencia')">
+        <div class="consent-check"></div>
+        <input type="checkbox" id="consent-ausencia">
+        <span class="consent-text">Estou ciente de que a <strong>ausência do serviço por mais de um mês sem comunicação prévia à liderança</strong> resultará em retirada dos grupos de serviço.</span>
+      </div>
+
+      <div class="consent-item" onclick="toggleConsent(this,'consent-celular')">
+        <div class="consent-check"></div>
+        <input type="checkbox" id="consent-celular">
+        <span class="consent-text">Estou ciente de que o <strong>uso do celular para fins pessoais é desencorajado durante o serviço</strong>, exceto quando necessário para a função — pois a atuação da Produção demanda atenção plena e rápida resposta.</span>
+      </div>
+
+      <div class="error-msg" id="err-consent" style="margin-top:12px">Confirme todos os itens acima para prosseguir.</div>
+    </div>
+
+    <!-- ── SUGESTÕES E CRÍTICAS ── -->
+    <div class="card">
+      <div class="card-title"><div class="icon">💬</div> Sugestões e críticas</div>
+      <div class="field">
+        <span class="field-label">Comentários <span class="hint">(opcional)</span></span>
+        <textarea id="sugestoes" placeholder="Compartilhe sugestões, críticas ou qualquer observação que queira fazer ao departamento..."></textarea>
+      </div>
+    </div>
+
+    <button type="button" class="btn-submit" id="submitBtn" onclick="submitForm()">✓ Enviar cadastro</button>
+    <button type="button" class="btn-clear" onclick="clearForm()">Limpar formulário</button>
+
+  </div><!-- /mainForm -->
+
+  <!-- Sucesso -->
+  <div id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2>Cadastro enviado!</h2>
+    <p>Obrigado por preencher o formulário.<br>Seus dados foram recebidos com sucesso.</p>
+    <button class="btn-novo" onclick="novoRegistro()">Novo cadastro</button>
+  </div>
+
+</div>
+
+<script>
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/SEU_DEPLOYMENT_ID/exec';
+var selectedDepts = [];
+
+// ── Departamentos ────────────────────────────────────────────────
+function toggleDept(card) {
+  var dept = card.dataset.dept;
+  card.classList.toggle('selected');
+  if (card.classList.contains('selected')) {
+    if (selectedDepts.indexOf(dept) < 0) selectedDepts.push(dept);
+  } else {
+    selectedDepts = selectedDepts.filter(function(d){ return d !== dept; });
+    // Limpa sub-seções quando desmarca
+    resetDeptSubs(dept);
+  }
+  ['palco','midia','som','iluminacao','broadcast'].forEach(function(s) {
+    var el = document.getElementById('sec-' + s);
+    if (el) el.classList[selectedDepts.indexOf(s) >= 0 ? 'add' : 'remove']('visible');
+  });
+  showErr('err-dept', false);
+  updateProgress();
+}
+
+function resetDeptSubs(dept) {
+  if (dept === 'palco') {
+    setVal('palco-funcao',''); setVal('palco-onde','');
+    setVal('palco-equipe',''); setVal('palco-ministerio','');
+    showSub('palco-sub-equipe', false);
+    showSub('palco-sub-ministerio', false);
+  }
+  if (dept === 'midia') {
+    setVal('midia-funcao',''); setVal('midia-treinamento','');
+    setVal('midia-avail',''); setVal('midia-period','');
+    showSub('midia-sub-treinamento', false);
+    showDomingoHorarios('midia', false);
+    uncheckAll('midia-domingo');
+  }
+  if (dept === 'som') {
+    setVal('som-avail',''); setVal('som-period','');
+    showDomingoHorarios('som', false);
+    uncheckAll('som-domingo');
+  }
+  if (dept === 'iluminacao') {
+    setVal('iluminacao-avail',''); setVal('iluminacao-period','');
+    showDomingoHorarios('iluminacao', false);
+    uncheckAll('iluminacao-domingo');
+  }
+  if (dept === 'broadcast') {
+    setVal('broadcast-equipe',''); setVal('broadcast-direcao','');
+    setVal('broadcast-min-avail','');
+    uncheckAll('broadcast-ministerio');
+    showSub('broadcast-sub-direcao', false);
+    showSub('broadcast-sub-ministerio', false);
+  }
+}
+
+// ── Palco: onde serve ────────────────────────────────────────────
+function onPalcoOndeChange() {
+  var v = document.getElementById('palco-onde').value;
+  showSub('palco-sub-equipe',     v === 'domingo-quarta');
+  showSub('palco-sub-ministerio', v === 'ministerios');
+  if (v !== 'domingo-quarta') { setVal('palco-equipe',''); }
+  if (v !== 'ministerios')    { setVal('palco-ministerio',''); }
+  showErr('err-palco-onde', false);
+  updateProgress();
+}
+
+// ── Mídia: função → treinamento ──────────────────────────────────
+function onMidiaFuncaoChange() {
+  var v = document.getElementById('midia-funcao').value;
+  var show = v === 'ProPresenter';
+  showSub('midia-sub-treinamento', show);
+  if (!show) setVal('midia-treinamento','');
+  showErr('err-midia-funcao', false);
+  updateProgress();
+}
+
+// ── Disponibilidade com horários de domingo ──────────────────────
+function onAvailChange(dept) {
+  var v = document.getElementById(dept + '-avail').value;
+  var hasDom = v === 'domingo' || v === 'domingo-quarta';
+  showDomingoHorarios(dept, hasDom);
+  if (!hasDom) uncheckAll(dept + '-domingo');
+  showErr('err-' + dept + '-avail', false);
+  updateProgress();
+}
+
+function showDomingoHorarios(dept, show) {
+  var el = document.getElementById(dept + '-domingo-horarios');
+  if (el) el.classList[show ? 'add' : 'remove']('visible');
+}
+
+// ── Broadcast: equipe → mostrar/ocultar direção ──────────────────
+function onBroadcastEquipeChange() {
+  var v = document.getElementById('broadcast-equipe').value;
+  var isTrainee = v === 'trainee';
+  showSub('broadcast-sub-direcao', !isTrainee);
+  if (isTrainee) { setVal('broadcast-direcao', ''); showErr('err-broadcast-direcao', false); }
+  updateProgress();
+}
+
+// ── Broadcast: ministério condicional ────────────────────────────
+function onBroadcastMinAvailChange() {
+  var v = document.getElementById('broadcast-min-avail').value;
+  showSub('broadcast-sub-ministerio', v === 'sim');
+  if (v !== 'sim') setVal('broadcast-ministerio','');
+  showErr('err-broadcast-min-avail', false);
+  updateProgress();
+}
+
+// ── Check-items ──────────────────────────────────────────────────
+function toggleCheck(label) {
+  var cb = label.querySelector('input[type="checkbox"]');
+  if (!cb) return;
+  setTimeout(function(){
+    label.classList[cb.checked ? 'add' : 'remove']('checked');
+    updateProgress();
+  }, 0);
+}
+
+function uncheckAll(name) {
+  document.querySelectorAll('input[name="' + name + '"]').forEach(function(cb){
+    cb.checked = false;
+    var lbl = cb.closest('label');
+    if (lbl) lbl.classList.remove('checked');
+  });
+}
+
+// ── Helpers ──────────────────────────────────────────────────────
+function showSub(id, show) {
+  var el = document.getElementById(id);
+  if (el) el.classList[show ? 'add' : 'remove']('visible');
+}
+function val(id)     { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+function setVal(id,v){ var e = document.getElementById(id); if (e) e.value = v; }
+function showErr(id, show, msg) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = show ? 'block' : 'none';
+  if (msg) el.textContent = msg;
+}
+
+// ── Progresso ────────────────────────────────────────────────────
+function updateProgress() {
+  var s1 = !!(val('nomeCompleto') && val('dataNasc') && val('email'));
+  var s2 = selectedDepts.length > 0;
+  var s3 = s2 && deptFieldsOk(false);
+  var s4 = consentAllChecked();
+  var done = (s1?1:0) + (s2?1:0) + (s3?1:0) + (s4?1:0);
+  document.getElementById('progressFill').style.width = (done / 4 * 100) + '%';
+  document.getElementById('progressLabel').textContent = done + ' de 4 seções preenchidas';
+}
+
+function deptFieldsOk(mark) {
+  var ok = true;
+  // Palco
+  if (selectedDepts.indexOf('palco') >= 0) {
+    if (!val('palco-funcao'))  { if(mark) showErr('err-palco-funcao',true);  ok=false; }
+    var onde = val('palco-onde');
+    if (!onde)                 { if(mark) showErr('err-palco-onde',true);    ok=false; }
+    if (onde === 'domingo-quarta' && !val('palco-equipe'))    { if(mark) showErr('err-palco-equipe',true);    ok=false; }
+    if (onde === 'ministerios'   && !val('palco-ministerio')) { if(mark) showErr('err-palco-ministerio',true); ok=false; }
+  }
+  // Mídia
+  if (selectedDepts.indexOf('midia') >= 0) {
+    var mf = val('midia-funcao');
+    if (!mf) { if(mark) showErr('err-midia-funcao',true); ok=false; }
+    if (mf === 'ProPresenter' && !val('midia-treinamento')) { if(mark) showErr('err-midia-treinamento',true); ok=false; }
+    if (!val('midia-avail'))  { if(mark) showErr('err-midia-avail',true);   ok=false; }
+    else {
+      var ma = val('midia-avail');
+      if ((ma==='domingo'||ma==='domingo-quarta') && !document.querySelector('input[name="midia-domingo"]:checked')) {
+        if(mark) showErr('err-midia-domingo',true); ok=false;
+      }
+    }
+    if (!val('midia-period')) { if(mark) showErr('err-midia-period',true);  ok=false; }
+  }
+  // Som (sem validação de função)
+  if (selectedDepts.indexOf('som') >= 0) {
+    if (!val('som-avail'))   { if(mark) showErr('err-som-avail',true);   ok=false; }
+    else {
+      var sa = val('som-avail');
+      if ((sa==='domingo'||sa==='domingo-quarta') && !document.querySelector('input[name="som-domingo"]:checked')) {
+        if(mark) showErr('err-som-domingo',true); ok=false;
+      }
+    }
+    if (!val('som-period'))  { if(mark) showErr('err-som-period',true);  ok=false; }
+  }
+  // Iluminação (sem validação de função)
+  if (selectedDepts.indexOf('iluminacao') >= 0) {
+    if (!val('iluminacao-avail'))   { if(mark) showErr('err-iluminacao-avail',true);   ok=false; }
+    else {
+      var ia = val('iluminacao-avail');
+      if ((ia==='domingo'||ia==='domingo-quarta') && !document.querySelector('input[name="iluminacao-domingo"]:checked')) {
+        if(mark) showErr('err-iluminacao-domingo',true); ok=false;
+      }
+    }
+    if (!val('iluminacao-period'))  { if(mark) showErr('err-iluminacao-period',true);  ok=false; }
+  }
+  // Broadcast
+  if (selectedDepts.indexOf('broadcast') >= 0) {
+    if (!val('broadcast-equipe'))    { if(mark) showErr('err-broadcast-equipe',true);    ok=false; }
+    if (val('broadcast-equipe') !== 'trainee' && !val('broadcast-direcao')) { if(mark) showErr('err-broadcast-direcao',true); ok=false; }
+    if (!val('broadcast-min-avail')) { if(mark) showErr('err-broadcast-min-avail',true); ok=false; }
+    if (val('broadcast-min-avail')==='sim' && !document.querySelector('input[name="broadcast-ministerio"]:checked')) {
+      if(mark) showErr('err-broadcast-ministerio',true); ok=false;
+    }
+  }
+  return ok;
+}
+
+// ── Consentimento ────────────────────────────────────────────────
+function toggleConsent(item, id) {
+  var cb = document.getElementById(id);
+  if (!cb) return;
+  cb.checked = !cb.checked;
+  item.classList[cb.checked ? 'add' : 'remove']('checked');
+  showErr('err-consent', false);
+  updateProgress();
+}
+
+function consentAllChecked() {
+  return ['consent-vestimenta','consent-horario','consent-ausencia','consent-celular'].every(function(id){
+    var el = document.getElementById(id);
+    return el && el.checked;
+  });
+}
+
+// ── Validação ────────────────────────────────────────────────────
+function validate() {
+  var ok = true;
+  if (!val('nomeCompleto')) { showErr('err-nomeCompleto',true); ok=false; } else showErr('err-nomeCompleto',false);
+  if (!val('dataNasc'))     { showErr('err-dataNasc',true);     ok=false; } else showErr('err-dataNasc',false);
+  var em = val('email');
+  if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { showErr('err-email',true,'Informe um e-mail válido.'); ok=false; } else showErr('err-email',false);
+  if (selectedDepts.length === 0) { showErr('err-dept',true); ok=false; } else showErr('err-dept',false);
+  if (!deptFieldsOk(true)) ok = false;
+  if (!consentAllChecked()) { showErr('err-consent',true); ok=false; } else showErr('err-consent',false);
+  return ok;
+}
+
+// ── Payload ──────────────────────────────────────────────────────
+function getChecked(name) {
+  var r = [];
+  document.querySelectorAll('input[name="'+name+'"]:checked').forEach(function(c){ r.push(c.value); });
+  return r;
+}
+
+function buildPayload() {
+  var d = {
+    formulario: 'producao_voluntarios',
+    nome_completo: val('nomeCompleto'),
+    email: val('email'),
+    data_nascimento: val('dataNasc'),
+    departamento: 'Produção',
+    areas: selectedDepts,
+    sugestoes: val('sugestoes')
+  };
+  if (selectedDepts.indexOf('palco') >= 0) d.palco = {
+    funcao: val('palco-funcao'), onde: val('palco-onde'),
+    equipe: val('palco-equipe'), ministerio: val('palco-ministerio')
+  };
+  if (selectedDepts.indexOf('midia') >= 0) d.midia = {
+    funcao: val('midia-funcao'), treinamento_madmapper: val('midia-treinamento'),
+    disponibilidade: val('midia-avail'), horarios_domingo: getChecked('midia-domingo'),
+    periodicidade: val('midia-period')
+  };
+  if (selectedDepts.indexOf('som') >= 0) d.som = {
+    disponibilidade: val('som-avail'), horarios_domingo: getChecked('som-domingo'),
+    periodicidade: val('som-period')
+  };
+  if (selectedDepts.indexOf('iluminacao') >= 0) d.iluminacao = {
+    disponibilidade: val('iluminacao-avail'), horarios_domingo: getChecked('iluminacao-domingo'),
+    periodicidade: val('iluminacao-period')
+  };
+  if (selectedDepts.indexOf('broadcast') >= 0) d.broadcast = {
+    equipe: val('broadcast-equipe'), serviu_direcao: val('broadcast-direcao'),
+    disponivel_ministerio: val('broadcast-min-avail'), ministerios: getChecked('broadcast-ministerio')
+  };
+  d.consentimentos = {
+    vestimenta: document.getElementById('consent-vestimenta').checked,
+    horario: document.getElementById('consent-horario').checked,
+    ausencia: document.getElementById('consent-ausencia').checked,
+    celular: document.getElementById('consent-celular').checked
+  };
+  return d;
+}
+
+// ── Submit ────────────────────────────────────────────────────────
+function submitForm() {
+  if (!validate()) {
+    var first = document.querySelector('.error-msg[style*="block"]');
+    if (first) first.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  fetch(APPS_SCRIPT_URL, {
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(buildPayload())
+  }).catch(function(e){ console.error(e); });
+  mostrarSucesso();
+  btn.disabled = false; btn.textContent = '✓ Enviar cadastro';
+}
+
+function mostrarSucesso() {
+  document.getElementById('mainForm').style.display = 'none';
+  document.getElementById('successScreen').style.display = 'block';
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function novoRegistro() {
+  selectedDepts = [];
+  document.querySelectorAll('.dept-card').forEach(function(c){ c.classList.remove('selected'); });
+  document.querySelectorAll('.dept-section').forEach(function(s){ s.classList.remove('visible'); });
+  document.querySelectorAll('.sub-section').forEach(function(s){ s.classList.remove('visible'); });
+  document.querySelectorAll('.domingo-horarios').forEach(function(s){ s.classList.remove('visible'); });
+  document.querySelectorAll('input[type="checkbox"]').forEach(function(cb){
+    cb.checked = false;
+    var l = cb.closest('label'); if (l) l.classList.remove('checked');
+  });
+  document.querySelectorAll('.consent-item').forEach(function(c){ c.classList.remove('checked'); });
+  document.querySelectorAll('select').forEach(function(s){ s.value = ''; });
+  document.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], textarea').forEach(function(e){ e.value=''; });
+  document.querySelectorAll('.error-msg').forEach(function(e){ e.style.display='none'; });
+  updateProgress();
+  document.getElementById('mainForm').style.display = 'block';
+  document.getElementById('successScreen').style.display = 'none';
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function clearForm() {
+  if (confirm('Limpar todos os dados preenchidos?')) novoRegistro();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  ['nomeCompleto','dataNasc','email'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateProgress);
+  });
+});
+</script>
+</body>
+</html>
