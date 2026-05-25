@@ -576,24 +576,24 @@
           </div>
         </div>
 
-        <!-- Disponibilidade Mídia -->
+<!-- Disponibilidade Mídia -->
         <div class="field" style="margin-top:14px">
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
-          <select id="midia-avail" onchange="onAvailChange('midia')">
-            <option value="">Selecione...</option>
-            <option value="domingo">Cultos de Domingo</option>
-            <option value="quarta">Quarta do Encontro</option>
-            <option value="a13jr">A13 Jr (sábado às 16h)</option>
-            <option value="a13school">A13 School (sábado às 18h)</option>
-            <option value="a13uni">A13 Uni (sábado às 20h)</option>
-            <option value="vert">Vert (sextas ou sábados às 20h)</option>
-            <option value="inspire">Inspire (sextas ou sábados às 20h)</option>
-            <option value="somosum">Somos Um (sábados às 18h)</option>
-          </select>
-          <div class="error-msg" id="err-midia-avail">Selecione sua disponibilidade.</div>
+          <span class="field-hint">Você pode marcar mais de uma opção.</span>
+          <div class="check-grid" style="margin-top:8px">
+            <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="midia" data-avail-val="domingo"><input type="checkbox" name="midia-avail" value="domingo"><div class="check-box"></div>Cultos de domingo</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="vert"><div class="check-box"></div>Vert <span class="time-hint">sex/sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="inspire"><div class="check-box"></div>Inspire <span class="time-hint">sex/sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="somosum"><div class="check-box"></div>Somos Um <span class="time-hint">sáb 18h</span></label>
+          </div>
+          <div class="error-msg" id="err-midia-avail">Selecione ao menos uma disponibilidade.</div>
           <!-- Horários de domingo -->
           <div class="domingo-horarios" id="midia-domingo-horarios">
-            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários? <span class="req">*</span></span>
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="9h"><div class="check-box"></div>9h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="11h"><div class="check-box"></div>11h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="17h"><div class="check-box"></div>17h</label>
@@ -612,7 +612,6 @@
           </select>
           <div class="error-msg" id="err-midia-period">Selecione a periodicidade.</div>
         </div>
-      </div>
 
       <!-- ════════════════════════════════════════
            SOM
@@ -620,22 +619,22 @@
       <div class="dept-section" id="sec-som">
         <div class="dept-section-title">Som</div>
 
-        <div class="field">
+      <div class="field">
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
-          <select id="som-avail" onchange="onAvailChange('som')">
-            <option value="">Selecione...</option>
-            <option value="domingo">Cultos de Domingo</option>
-            <option value="quarta">Quarta do Encontro</option>
-            <option value="a13jr">A13 Jr (sábado às 16h)</option>
-            <option value="a13school">A13 School (sábado às 18h)</option>
-            <option value="a13uni">A13 Uni (sábado às 20h)</option>
-            <option value="vert">Vert (sextas ou sábados às 20h)</option>
-            <option value="inspire">Inspire (sextas ou sábados às 20h)</option>
-            <option value="somosum">Somos Um (sábados às 18h)</option>
-          </select>
-          <div class="error-msg" id="err-som-avail">Selecione sua disponibilidade.</div>
+          <span class="field-hint">Você pode marcar mais de uma opção.</span>
+          <div class="check-grid" style="margin-top:8px">
+            <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="som" data-avail-val="domingo"><input type="checkbox" name="som-avail" value="domingo"><div class="check-box"></div>Cultos de domingo</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="vert"><div class="check-box"></div>Vert <span class="time-hint">sex/sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="inspire"><div class="check-box"></div>Inspire <span class="time-hint">sex/sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="somosum"><div class="check-box"></div>Somos Um <span class="time-hint">sáb 18h</span></label>
+          </div>
+          <div class="error-msg" id="err-som-avail">Selecione ao menos uma disponibilidade.</div>
           <div class="domingo-horarios" id="som-domingo-horarios">
-            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários? <span class="req">*</span></span>
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="9h"><div class="check-box"></div>9h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="11h"><div class="check-box"></div>11h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-domingo" value="17h"><div class="check-box"></div>17h</label>
@@ -664,20 +663,20 @@
 
         <div class="field">
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
-          <select id="iluminacao-avail" onchange="onAvailChange('iluminacao')">
-            <option value="">Selecione...</option>
-            <option value="domingo">Cultos de Domingo</option>
-            <option value="quarta">Quarta do Encontro</option>
-            <option value="a13jr">A13 Jr (sábado às 16h)</option>
-            <option value="a13school">A13 School (sábado às 18h)</option>
-            <option value="a13uni">A13 Uni (sábado às 20h)</option>
-            <option value="vert">Vert (sextas ou sábados às 20h)</option>
-            <option value="inspire">Inspire (sextas ou sábados às 20h)</option>
-            <option value="somosum">Somos Um (sábados às 18h)</option>
-          </select>
-          <div class="error-msg" id="err-iluminacao-avail">Selecione sua disponibilidade.</div>
+          <span class="field-hint">Você pode marcar mais de uma opção.</span>
+          <div class="check-grid" style="margin-top:8px">
+            <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="iluminacao" data-avail-val="domingo"><input type="checkbox" name="iluminacao-avail" value="domingo"><div class="check-box"></div>Cultos de domingo</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="vert"><div class="check-box"></div>Vert <span class="time-hint">sex/sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="inspire"><div class="check-box"></div>Inspire <span class="time-hint">sex/sáb 20h</span></label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="somosum"><div class="check-box"></div>Somos Um <span class="time-hint">sáb 18h</span></label>
+          </div>
+          <div class="error-msg" id="err-iluminacao-avail">Selecione ao menos uma disponibilidade.</div>
           <div class="domingo-horarios" id="iluminacao-domingo-horarios">
-            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários? <span class="req">*</span></span>
+            <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="9h"><div class="check-box"></div>9h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="11h"><div class="check-box"></div>11h</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-domingo" value="17h"><div class="check-box"></div>17h</label>
@@ -895,19 +894,27 @@ function onMidiaFuncaoChange() {
 }
 
 // ── Disponibilidade com horários de domingo ──────────────────────
-function onAvailChange(dept) {
-  var v = document.getElementById(dept + '-avail').value;
-  var hasDom = v === 'domingo' || v === 'domingo-quarta';
-  showDomingoHorarios(dept, hasDom);
-  if (!hasDom) uncheckAll(dept + '-domingo');
-  showErr('err-' + dept + '-avail', false);
-  updateProgress();
-}
-
 function showDomingoHorarios(dept, show) {
   var el = document.getElementById(dept + '-domingo-horarios');
   if (el) el.classList[show ? 'add' : 'remove']('visible');
 }
+
+// ── Check-items ──────────────────────────────────────────────────
+function toggleCheck(label) {
+  var cb = label.querySelector('input[type="checkbox"]');
+  if (!cb) return;
+  setTimeout(function(){
+    label.classList[cb.checked ? 'add' : 'remove']('checked');
+    // Se for checkbox de disponibilidade com domingo, controla horários
+    var dept = label.dataset.availDept;
+    if (dept && label.dataset.availVal === 'domingo') {
+      showDomingoHorarios(dept, cb.checked);
+      if (!cb.checked) uncheckAll(dept + '-domingo');
+    }
+    showErr('err-' + (cb.name || ''), false);
+    updateProgress();
+  }, 0);
+} 
 
 // ── Broadcast: equipe → mostrar/ocultar direção ──────────────────
 function onBroadcastEquipeChange() {
@@ -925,16 +932,6 @@ function onBroadcastMinAvailChange() {
   if (v !== 'sim') setVal('broadcast-ministerio','');
   showErr('err-broadcast-min-avail', false);
   updateProgress();
-}
-
-// ── Check-items ──────────────────────────────────────────────────
-function toggleCheck(label) {
-  var cb = label.querySelector('input[type="checkbox"]');
-  if (!cb) return;
-  setTimeout(function(){
-    label.classList[cb.checked ? 'add' : 'remove']('checked');
-    updateProgress();
-  }, 0);
 }
 
 function uncheckAll(name) {
