@@ -279,6 +279,10 @@
     display: block;
   }
 
+  .check-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .time-hint { color: var(--gray-400); font-size: 11px; margin-left: 3px; }
+  .field-hint { display: block; font-size: 12px; color: var(--gray-500); margin-bottom: 6px; font-style: italic; }
+
   /* Submit */
   .btn-submit {
     width: 100%; padding: 14px 24px;
@@ -334,11 +338,7 @@
   }
   .btn-novo:hover { border-color: var(--black); color: var(--black); }
 
-  .check-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-  .time-hint { color: var(--gray-400); font-size: 11px; margin-left: 3px; }
-  .field-hint { display: block; font-size: 12px; color: var(--gray-500); margin-bottom: 2px; font-style: italic; }
-
-  /* Card de ciências/consentimento */
+  /* Card de consentimento */
   .consent-item {
     display: flex; align-items: flex-start; gap: 12px;
     background: var(--gray-50);
@@ -352,10 +352,7 @@
   }
   .consent-item:last-of-type { margin-bottom: 0; }
   .consent-item:hover { border-color: var(--gray-400); }
-  .consent-item.checked {
-    border-color: var(--black);
-    background: #f5f5f5;
-  }
+  .consent-item.checked { border-color: var(--black); background: #f5f5f5; }
   .consent-item .consent-check {
     width: 18px; height: 18px; flex-shrink: 0;
     border: 1.5px solid var(--gray-300);
@@ -365,9 +362,7 @@
     transition: border-color 0.15s, background 0.15s;
     margin-top: 1px;
   }
-  .consent-item.checked .consent-check {
-    background: var(--black); border-color: var(--black);
-  }
+  .consent-item.checked .consent-check { background: var(--black); border-color: var(--black); }
   .consent-item.checked .consent-check::after {
     content: '';
     width: 9px; height: 5px;
@@ -399,7 +394,7 @@
 
 <div class="container">
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <p class="progress-label" id="progressLabel">0 de 3 seções preenchidas</p>
+  <p class="progress-label" id="progressLabel">0 de 4 seções preenchidas</p>
 
   <div id="mainForm">
 
@@ -576,11 +571,11 @@
           </div>
         </div>
 
-<!-- Disponibilidade Mídia -->
+        <!-- Disponibilidade Mídia -->
         <div class="field" style="margin-top:14px">
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
           <span class="field-hint">Você pode marcar mais de uma opção.</span>
-          <div class="check-grid" style="margin-top:8px">
+          <div class="check-grid">
             <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="midia" data-avail-val="domingo"><input type="checkbox" name="midia-avail" value="domingo"><div class="check-box"></div>Cultos de domingo</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
@@ -591,7 +586,6 @@
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-avail" value="somosum"><div class="check-box"></div>Somos Um <span class="time-hint">sáb 18h</span></label>
           </div>
           <div class="error-msg" id="err-midia-avail">Selecione ao menos uma disponibilidade.</div>
-          <!-- Horários de domingo -->
           <div class="domingo-horarios" id="midia-domingo-horarios">
             <span class="field-label" style="width:100%;margin-bottom:4px">Quais horários de domingo? <span class="req">*</span></span>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="midia-domingo" value="9h"><div class="check-box"></div>9h</label>
@@ -612,6 +606,7 @@
           </select>
           <div class="error-msg" id="err-midia-period">Selecione a periodicidade.</div>
         </div>
+      </div>
 
       <!-- ════════════════════════════════════════
            SOM
@@ -619,10 +614,10 @@
       <div class="dept-section" id="sec-som">
         <div class="dept-section-title">Som</div>
 
-      <div class="field">
+        <div class="field">
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
           <span class="field-hint">Você pode marcar mais de uma opção.</span>
-          <div class="check-grid" style="margin-top:8px">
+          <div class="check-grid">
             <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="som" data-avail-val="domingo"><input type="checkbox" name="som-avail" value="domingo"><div class="check-box"></div>Cultos de domingo</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="som-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
@@ -664,7 +659,7 @@
         <div class="field">
           <span class="field-label">Disponibilidade <span class="req">*</span></span>
           <span class="field-hint">Você pode marcar mais de uma opção.</span>
-          <div class="check-grid" style="margin-top:8px">
+          <div class="check-grid">
             <label class="check-item" onclick="toggleCheck(this)" data-avail-dept="iluminacao" data-avail-val="domingo"><input type="checkbox" name="iluminacao-avail" value="domingo"><div class="check-box"></div>Cultos de domingo</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="quarta"><div class="check-box"></div>Quarta do Encontro</label>
             <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="iluminacao-avail" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
@@ -742,7 +737,7 @@
           <div class="field">
             <span class="field-label">Qual(is) ministério(s)? <span class="req">*</span></span>
             <span class="field-hint">Você pode marcar mais de uma opção.</span>
-            <div class="check-grid" style="margin-top:8px">
+            <div class="check-grid">
               <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="a13jr"><div class="check-box"></div>A13 Jr <span class="time-hint">sáb 16h</span></label>
               <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="a13school"><div class="check-box"></div>A13 School <span class="time-hint">sáb 18h</span></label>
               <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="broadcast-ministerio" value="a13uni"><div class="check-box"></div>A13 Uni <span class="time-hint">sáb 20h</span></label>
@@ -828,7 +823,6 @@ function toggleDept(card) {
     if (selectedDepts.indexOf(dept) < 0) selectedDepts.push(dept);
   } else {
     selectedDepts = selectedDepts.filter(function(d){ return d !== dept; });
-    // Limpa sub-seções quando desmarca
     resetDeptSubs(dept);
   }
   ['palco','midia','som','iluminacao','broadcast'].forEach(function(s) {
@@ -847,21 +841,23 @@ function resetDeptSubs(dept) {
     showSub('palco-sub-ministerio', false);
   }
   if (dept === 'midia') {
-    setVal('midia-funcao',''); setVal('midia-treinamento','');
-    setVal('midia-avail',''); setVal('midia-period','');
+    setVal('midia-funcao',''); setVal('midia-treinamento',''); setVal('midia-period','');
     showSub('midia-sub-treinamento', false);
-    showDomingoHorarios('midia', false);
+    uncheckAll('midia-avail');
     uncheckAll('midia-domingo');
+    showDomingoHorarios('midia', false);
   }
   if (dept === 'som') {
-    setVal('som-avail',''); setVal('som-period','');
-    showDomingoHorarios('som', false);
+    setVal('som-period','');
+    uncheckAll('som-avail');
     uncheckAll('som-domingo');
+    showDomingoHorarios('som', false);
   }
   if (dept === 'iluminacao') {
-    setVal('iluminacao-avail',''); setVal('iluminacao-period','');
-    showDomingoHorarios('iluminacao', false);
+    setVal('iluminacao-period','');
+    uncheckAll('iluminacao-avail');
     uncheckAll('iluminacao-domingo');
+    showDomingoHorarios('iluminacao', false);
   }
   if (dept === 'broadcast') {
     setVal('broadcast-equipe',''); setVal('broadcast-direcao','');
@@ -893,28 +889,11 @@ function onMidiaFuncaoChange() {
   updateProgress();
 }
 
-// ── Disponibilidade com horários de domingo ──────────────────────
+// ── Horários de domingo ──────────────────────────────────────────
 function showDomingoHorarios(dept, show) {
   var el = document.getElementById(dept + '-domingo-horarios');
   if (el) el.classList[show ? 'add' : 'remove']('visible');
 }
-
-// ── Check-items ──────────────────────────────────────────────────
-function toggleCheck(label) {
-  var cb = label.querySelector('input[type="checkbox"]');
-  if (!cb) return;
-  setTimeout(function(){
-    label.classList[cb.checked ? 'add' : 'remove']('checked');
-    // Se for checkbox de disponibilidade com domingo, controla horários
-    var dept = label.dataset.availDept;
-    if (dept && label.dataset.availVal === 'domingo') {
-      showDomingoHorarios(dept, cb.checked);
-      if (!cb.checked) uncheckAll(dept + '-domingo');
-    }
-    showErr('err-' + (cb.name || ''), false);
-    updateProgress();
-  }, 0);
-} 
 
 // ── Broadcast: equipe → mostrar/ocultar direção ──────────────────
 function onBroadcastEquipeChange() {
@@ -929,9 +908,26 @@ function onBroadcastEquipeChange() {
 function onBroadcastMinAvailChange() {
   var v = document.getElementById('broadcast-min-avail').value;
   showSub('broadcast-sub-ministerio', v === 'sim');
-  if (v !== 'sim') setVal('broadcast-ministerio','');
+  if (v !== 'sim') uncheckAll('broadcast-ministerio');
   showErr('err-broadcast-min-avail', false);
   updateProgress();
+}
+
+// ── Check-items ──────────────────────────────────────────────────
+function toggleCheck(label) {
+  var cb = label.querySelector('input[type="checkbox"]');
+  if (!cb) return;
+  setTimeout(function(){
+    label.classList[cb.checked ? 'add' : 'remove']('checked');
+    // Controla horários de domingo para Mídia, Som e Iluminação
+    var dept = label.dataset.availDept;
+    if (dept && label.dataset.availVal === 'domingo') {
+      showDomingoHorarios(dept, cb.checked);
+      if (!cb.checked) uncheckAll(dept + '-domingo');
+    }
+    showErr('err-' + (cb.name || ''), false);
+    updateProgress();
+  }, 0);
 }
 
 function uncheckAll(name) {
@@ -971,9 +967,9 @@ function deptFieldsOk(mark) {
   var ok = true;
   // Palco
   if (selectedDepts.indexOf('palco') >= 0) {
-    if (!val('palco-funcao'))  { if(mark) showErr('err-palco-funcao',true);  ok=false; }
+    if (!val('palco-funcao')) { if(mark) showErr('err-palco-funcao',true); ok=false; }
     var onde = val('palco-onde');
-    if (!onde)                 { if(mark) showErr('err-palco-onde',true);    ok=false; }
+    if (!onde) { if(mark) showErr('err-palco-onde',true); ok=false; }
     if (onde === 'domingo-quarta' && !val('palco-equipe'))    { if(mark) showErr('err-palco-equipe',true);    ok=false; }
     if (onde === 'ministerios'   && !val('palco-ministerio')) { if(mark) showErr('err-palco-ministerio',true); ok=false; }
   }
@@ -982,43 +978,34 @@ function deptFieldsOk(mark) {
     var mf = val('midia-funcao');
     if (!mf) { if(mark) showErr('err-midia-funcao',true); ok=false; }
     if (mf === 'ProPresenter' && !val('midia-treinamento')) { if(mark) showErr('err-midia-treinamento',true); ok=false; }
-    if (!val('midia-avail'))  { if(mark) showErr('err-midia-avail',true);   ok=false; }
-    else {
-      var ma = val('midia-avail');
-      if ((ma==='domingo'||ma==='domingo-quarta') && !document.querySelector('input[name="midia-domingo"]:checked')) {
-        if(mark) showErr('err-midia-domingo',true); ok=false;
-      }
+    if (!document.querySelector('input[name="midia-avail"]:checked')) { if(mark) showErr('err-midia-avail',true); ok=false; }
+    else if (document.querySelector('input[name="midia-avail"][value="domingo"]:checked') && !document.querySelector('input[name="midia-domingo"]:checked')) {
+      if(mark) showErr('err-midia-domingo',true); ok=false;
     }
-    if (!val('midia-period')) { if(mark) showErr('err-midia-period',true);  ok=false; }
+    if (!val('midia-period')) { if(mark) showErr('err-midia-period',true); ok=false; }
   }
-  // Som (sem validação de função)
+  // Som
   if (selectedDepts.indexOf('som') >= 0) {
-    if (!val('som-avail'))   { if(mark) showErr('err-som-avail',true);   ok=false; }
-    else {
-      var sa = val('som-avail');
-      if ((sa==='domingo'||sa==='domingo-quarta') && !document.querySelector('input[name="som-domingo"]:checked')) {
-        if(mark) showErr('err-som-domingo',true); ok=false;
-      }
+    if (!document.querySelector('input[name="som-avail"]:checked')) { if(mark) showErr('err-som-avail',true); ok=false; }
+    else if (document.querySelector('input[name="som-avail"][value="domingo"]:checked') && !document.querySelector('input[name="som-domingo"]:checked')) {
+      if(mark) showErr('err-som-domingo',true); ok=false;
     }
-    if (!val('som-period'))  { if(mark) showErr('err-som-period',true);  ok=false; }
+    if (!val('som-period')) { if(mark) showErr('err-som-period',true); ok=false; }
   }
-  // Iluminação (sem validação de função)
+  // Iluminação
   if (selectedDepts.indexOf('iluminacao') >= 0) {
-    if (!val('iluminacao-avail'))   { if(mark) showErr('err-iluminacao-avail',true);   ok=false; }
-    else {
-      var ia = val('iluminacao-avail');
-      if ((ia==='domingo'||ia==='domingo-quarta') && !document.querySelector('input[name="iluminacao-domingo"]:checked')) {
-        if(mark) showErr('err-iluminacao-domingo',true); ok=false;
-      }
+    if (!document.querySelector('input[name="iluminacao-avail"]:checked')) { if(mark) showErr('err-iluminacao-avail',true); ok=false; }
+    else if (document.querySelector('input[name="iluminacao-avail"][value="domingo"]:checked') && !document.querySelector('input[name="iluminacao-domingo"]:checked')) {
+      if(mark) showErr('err-iluminacao-domingo',true); ok=false;
     }
-    if (!val('iluminacao-period'))  { if(mark) showErr('err-iluminacao-period',true);  ok=false; }
+    if (!val('iluminacao-period')) { if(mark) showErr('err-iluminacao-period',true); ok=false; }
   }
   // Broadcast
   if (selectedDepts.indexOf('broadcast') >= 0) {
-    if (!val('broadcast-equipe'))    { if(mark) showErr('err-broadcast-equipe',true);    ok=false; }
+    if (!val('broadcast-equipe')) { if(mark) showErr('err-broadcast-equipe',true); ok=false; }
     if (val('broadcast-equipe') !== 'trainee' && !val('broadcast-direcao')) { if(mark) showErr('err-broadcast-direcao',true); ok=false; }
     if (!val('broadcast-min-avail')) { if(mark) showErr('err-broadcast-min-avail',true); ok=false; }
-    if (val('broadcast-min-avail')==='sim' && !document.querySelector('input[name="broadcast-ministerio"]:checked')) {
+    if (val('broadcast-min-avail') === 'sim' && !document.querySelector('input[name="broadcast-ministerio"]:checked')) {
       if(mark) showErr('err-broadcast-ministerio',true); ok=false;
     }
   }
@@ -1078,15 +1065,15 @@ function buildPayload() {
   };
   if (selectedDepts.indexOf('midia') >= 0) d.midia = {
     funcao: val('midia-funcao'), treinamento_madmapper: val('midia-treinamento'),
-    disponibilidade: val('midia-avail'), horarios_domingo: getChecked('midia-domingo'),
+    disponibilidade: getChecked('midia-avail'), horarios_domingo: getChecked('midia-domingo'),
     periodicidade: val('midia-period')
   };
   if (selectedDepts.indexOf('som') >= 0) d.som = {
-    disponibilidade: val('som-avail'), horarios_domingo: getChecked('som-domingo'),
+    disponibilidade: getChecked('som-avail'), horarios_domingo: getChecked('som-domingo'),
     periodicidade: val('som-period')
   };
   if (selectedDepts.indexOf('iluminacao') >= 0) d.iluminacao = {
-    disponibilidade: val('iluminacao-avail'), horarios_domingo: getChecked('iluminacao-domingo'),
+    disponibilidade: getChecked('iluminacao-avail'), horarios_domingo: getChecked('iluminacao-domingo'),
     periodicidade: val('iluminacao-period')
   };
   if (selectedDepts.indexOf('broadcast') >= 0) d.broadcast = {
@@ -1095,9 +1082,9 @@ function buildPayload() {
   };
   d.consentimentos = {
     vestimenta: document.getElementById('consent-vestimenta').checked,
-    horario: document.getElementById('consent-horario').checked,
-    ausencia: document.getElementById('consent-ausencia').checked,
-    celular: document.getElementById('consent-celular').checked
+    horario:    document.getElementById('consent-horario').checked,
+    ausencia:   document.getElementById('consent-ausencia').checked,
+    celular:    document.getElementById('consent-celular').checked
   };
   return d;
 }
